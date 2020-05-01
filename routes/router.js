@@ -8,6 +8,8 @@ const params = require("../params");
 // Watson NLU Route for analize text
 router.post("/upload-text", async function (req, res) {
   const inputText = req.body.text;
+  console.log(inputText);
+  
 
   try {
     if (!inputText) {
@@ -43,11 +45,36 @@ router.get("/tweets/:hashtag", async function (req, res) {
           console.log(tweetAns);
           for (const item of tweetAns) {
             await callNLUnderstanding(params, item.text).then((ans) =>
-              proDataNL(ans).then((finalRes) => finalJson.push(finalRes))
+              proDataNL(ans).then((finalRes) => {
+                if (finalRes.text != "vacio") finalJson.push(finalRes);
+              })
             );
           }
         })
       );
+      res.json(finalJson);
+    }
+  } catch (err) {
+    res.status(500).json({ message: "No se pudo analizar el texto ingresado" });
+  }
+});
+
+router.get("/getTweets/:hashtag", async function (req, res) {
+  const hashTag = req.params.hashtag;
+
+  try {
+    if (!hashTag) {
+      res.send({
+        status: false,
+        message: "No hashtag detected",
+      });
+    } else {
+      let finalJson = [];
+      await callTwitter(params, hashTag).then((ans) => {
+        for (const i of ans.statuses) {
+          finalJson.push(i.text);
+        }
+      });
       res.json(finalJson);
     }
   } catch (err) {

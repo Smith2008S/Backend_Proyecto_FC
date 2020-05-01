@@ -9,25 +9,27 @@ function proDataNL(resultNL) {
       var entities = resultNL.entities;
 
       // For debugging purpose
-      //console.log("RELATIONS: \n\n" + JSON.stringify(relations, null, 2));
-      //console.log("ENTITIES: \n\n" + JSON.stringify(entities, null, 2));
+      // console.log("RELATIONS: \n\n" + JSON.stringify(relations, null, 2));
+      // console.log("ENTITIES: \n\n" + JSON.stringify(entities, null, 2));
+      console.log(entities[0]);
+      if (entities[0] != undefined) {
+        for (var item of entities) {
+          item.type = item.type[0] + item.type.slice(1).toLowerCase();
+          item.text = item.text[0].toUpperCase() + item.text.slice(1);
 
-      for (var item of entities) {
-        item.type = item.type[0] + item.type.slice(1).toLowerCase();
-        item.text = item.text[0].toUpperCase() + item.text.slice(1);
+          // Eliminar propiedades de un objeto
+          delete item.disambiguation;
+          delete item.count;
+          delete item.confidence;
+        }
 
-        // Eliminar propiedades de un objeto
-        delete item.disambiguation;
-        delete item.count;
-        delete item.confidence;
-      }
+        // Delete duplicates
+        const resJson = [
+          ...new Map(entities.map((item) => [item.text, item])).values(),
+        ];
 
-      // Delete duplicates
-      const resJson = [
-        ...new Map(entities.map((item) => [item.text, item])).values(),
-      ];
-
-      resolve(resJson);
+        resolve(resJson);
+      } else resolve({ text: "vacio" });
     } catch (error) {
       reject(error);
     }
