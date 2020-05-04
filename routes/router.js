@@ -53,7 +53,7 @@ router.get("/tweets/:hashtag", async function (req, res) {
         })
       );
 
-      res.send(finalJson);
+      res.json((finalJson));
     }
   } catch (err) {
     res.status(500).json({ message: "No se pudo analizar el texto ingresado" });
