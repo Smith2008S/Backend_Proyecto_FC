@@ -1,11 +1,10 @@
 const NaturalLanguageUnderstandingV1 = require("ibm-watson/natural-language-understanding/v1");
 const { IamAuthenticator } = require("ibm-watson/auth");
 
-
-  // "nl_version": "2020-04-30",
-  // "nl_api_key": "Zf0vXkfcizlhQ0LdxNUiBL4HrfmxvbOKabxbS846fy3S",
-  // "nl_url": "https://api.eu-gb.natural-language-understanding.watson.cloud.ibm.com/instances/153394d7-56b3-4dd7-abe6-e0deffe7f886",
-  // "nl_model_id": "43c58670-f917-43b6-afda-470724a251ca",
+// "nl_version": "2020-04-30",
+// "nl_api_key": "Zf0vXkfcizlhQ0LdxNUiBL4HrfmxvbOKabxbS846fy3S",
+// "nl_url": "https://api.eu-gb.natural-language-understanding.watson.cloud.ibm.com/instances/153394d7-56b3-4dd7-abe6-e0deffe7f886",
+// "nl_model_id": "43c58670-f917-43b6-afda-470724a251ca",
 
 function callNLUnderstanding(params, text) {
   return new Promise(function (resolve, reject) {

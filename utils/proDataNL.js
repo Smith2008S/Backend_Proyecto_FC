@@ -11,7 +11,6 @@ function proDataNL(resultNL) {
       // For debugging purpose
       // console.log("RELATIONS: \n\n" + JSON.stringify(relations, null, 2));
       // console.log("ENTITIES: \n\n" + JSON.stringify(entities, null, 2));
-      console.log(entities[0]);
       if (entities[0] != undefined) {
         for (var item of entities) {
           item.type = item.type[0] + item.type.slice(1).toLowerCase();

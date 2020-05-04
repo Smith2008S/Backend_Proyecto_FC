@@ -10,10 +10,19 @@ function callTwitter(twitterParams, hashTag) {
       });
       console.log("Twitter Connected! :D");
 
-      twitter.get("search/tweets", { q: hashTag, count: 6, lang: 'es' }, function (err, data) {
-        if (err) console.error(err);
-        resolve(data);
-      });
+      twitter.get(
+        "search/tweets",
+        {
+          q: hashTag,
+          count: 10,
+          result_type: "recent",
+          lang: "es",
+        },
+        function (err, data) {
+          if (err) console.error(err);
+          resolve(data);
+        }
+      );
     } catch (error) {
       console.error(error);
       reject(error);

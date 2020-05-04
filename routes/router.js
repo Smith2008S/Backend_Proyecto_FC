@@ -4,12 +4,12 @@ const proDataNL = require("../utils/proDataNL");
 const callTwitter = require("../utils/twitterAPI");
 const proTweet = require("../utils/proTweet");
 const params = require("../params");
+const fs = require("fs");
 
 // Watson NLU Route for analize text
 router.post("/upload-text", async function (req, res) {
   const inputText = req.body.text;
   console.log(inputText);
-  
 
   try {
     if (!inputText) {
@@ -42,17 +42,18 @@ router.get("/tweets/:hashtag", async function (req, res) {
       let finalJson = [];
       await callTwitter(params, hashTag).then((ans) =>
         proTweet(ans).then(async (tweetAns) => {
-          console.log(tweetAns);
           for (const item of tweetAns) {
-            await callNLUnderstanding(params, item.text).then((ans) =>
+            await callNLUnderstanding(params, item).then((ans) =>
               proDataNL(ans).then((finalRes) => {
-                if (finalRes.text != "vacio") finalJson.push(finalRes);
+                if (finalRes.text != "vacio")
+                  finalJson.push({ tweet: item, analysis: finalRes });
               })
             );
           }
         })
       );
-      res.json(finalJson);
+
+      res.send(finalJson);
     }
   } catch (err) {
     res.status(500).json({ message: "No se pudo analizar el texto ingresado" });
@@ -72,8 +73,11 @@ router.get("/getTweets/:hashtag", async function (req, res) {
       let finalJson = [];
       await callTwitter(params, hashTag).then((ans) => {
         for (const i of ans.statuses) {
-          finalJson.push(i.text);
+          if (!finalJson.includes(i.text)) finalJson.push(i.text);
         }
+      });
+      fs.writeFile("./doc22.txt", finalJson, (err) => {
+        if (err) console.log(err);
       });
       res.json(finalJson);
     }
