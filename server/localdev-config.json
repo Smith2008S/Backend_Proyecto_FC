@@ -1,0 +1,14 @@
+{
+  "cos_original_bucket": "bolsa-valores",
+  "cos_normalized_bucket": "bolsa-valores",
+  "cos_api_key": "4ICnPW2Lv2DUF-O89KwhwP1cVzMiVNrZSjwvtSjOU4Nh",
+  "cos_endpoint": "s3.us-east.cloud-object-storage.appdomain.cloud",
+  "iam_apikey_description": "auto-generated-apikey-6a22f0e4-8313-4a5a-ac18-1b181ac5f295",
+  "iam_apikey_name": "Service credentials-1",
+  "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/9965191dac4a41db852811b1434e88c9::serviceid:ServiceId-aa57f464-71ab-41fb-8591-80d6624894dc",
+  "cos_service_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/9965191dac4a41db852811b1434e88c9:d1376ef3-9f43-4acb-9aa4-c10e7a14eb02::",
+  "access_key_id": "6a22f0e483134a5aac181b181ac5f295",
+  "secret_access_key": "a417c60683678d78d505f73aaca9390997864581c9a607e9"
+}
+
